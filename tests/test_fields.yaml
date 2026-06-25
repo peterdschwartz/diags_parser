@@ -1,0 +1,5 @@
+qv**2*qi.sum(dims=[1])
+(x*dp).sum(dims=[2])/dp.sum(dims=[1])
+homme_T_mid.tend()
+qv.derivative(dx=dz,dims=[0]).where(omega <= -10)
+(omega*qv.derivative(dx=dz,dims=['col'])).where(omega <= -10)
