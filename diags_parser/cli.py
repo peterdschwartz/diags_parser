@@ -22,8 +22,14 @@ def parse_line(args):
 
     program = parser.parse_program()
     from pprint import pprint
-    output = {f"{stmt}":stmt.to_dict() for stmt in program.statements}
-    pprint(output)
+    print("\n ----- Grouped String -----")
+    for stmt in program.statements:
+        print(str(stmt))
+
+    print("\n ---- AST to Dictionary -----")
+
+    for stmt in program.statements:
+        pprint(stmt.to_dict())
     return
 
 def list_supported_functions(args):
@@ -41,7 +47,7 @@ def main():
     _parse_parser = _subparser.add_parser("parse", help="Parse provided string")
     _parse_parser.add_argument("-s",required=False,dest="line")
     _parse_parser.add_argument("-f",required=False,dest="file",help="parse entire file")
-    _parse_parser.add_argument("-t",required=False,dest="trace",action="store_true")
+    _parse_parser.add_argument("-t",required=False,dest="trace",action="store_true",help="Enable Tracing of recurisve functions")
     _parse_parser.set_defaults(func=parse_line)
 
     _func_parser = _subparser.add_parser("functions",help="List supported functions")

@@ -50,7 +50,7 @@ precedences = {
     TokenTypes.OR: Precedence.EQUALS,
     TokenTypes.CONCAT: Precedence.PRODUCT,
     TokenTypes.BANG: Precedence.PREFIX,
-    TokenTypes.DOT: Precedence.BOUNDS,
+    TokenTypes.DOT: Precedence.SUM,
 }
 
 PrefixParseFn = Callable[[], Expression]
@@ -141,7 +141,7 @@ class Parser:
         self.peek_token = self.lexer.next_token()
         self.lexer.token_pos += 1
 
-        self.logger.debug(f"{self.cur_token} -> {self.peek_token}")
+        # self.logger.debug(f"{self.cur_token} -> {self.peek_token}")
         self.lineno = self.lexer.cur_ln
         return
 

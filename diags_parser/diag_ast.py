@@ -256,7 +256,7 @@ class PrefixExpression(Expression):
         pass
 
     def __str__(self):
-        return f"{self.operator} ({str(self.right_expr)})"
+        return f"{self.operator}{self.right_expr}"
 
     def __eq__(self, other):
         if not isinstance(other, PrefixExpression):
@@ -302,7 +302,7 @@ class InfixExpression(Expression):
         return (self.left_expr, self.operator, self.right_expr)
 
     def __str__(self):
-        return str(self.left_expr) + f" {self.operator} " + str(self.right_expr)
+        return f"({ self.left_expr }){self.operator}({ self.right_expr })"
 
     def __eq__(self, other):
         if not isinstance(other, InfixExpression):
@@ -447,7 +447,7 @@ class ArrayExpression(Expression):
 
     def __str__(self) -> str:
         els = [str(el) for el in self.elements]
-        return f"[ {','.join(els)} ]"
+        return f"[{','.join(els)}]"
 
     def to_dict(self) -> dict:
         return {"Node": "ArrayExpr", "Elements": [el.to_dict() for el in self.elements]}
@@ -536,7 +536,7 @@ class DerivativeExpression(Expression):
         return self.token.literal
 
     def __str__(self) -> str:
-        return f"{self.token_literal()}(dx={self.dx}, dims={self.dims})"
+        return f"DERIV(dx={self.dx}, dims={self.dims})"
 
     def to_dict(self) -> dict:
         return {
